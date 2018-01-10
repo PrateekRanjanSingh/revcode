@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="prateek">
+	<meta name="description" content="Subscription Portal">
+	<title>Subscription Portal</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="/logo2.png"/>
+</head>
+<body>
+<header>
+    <div class="header-wrapper">
+        <span><img src="logo.png"></span>
+	   <!-- <h1 style="text-align: center; font-weight: bold;">REVERSE <span style="background-color: blue;">CODING</span> </h1> -->
+    </div>
+</header>
+    <section class="main-wrapper">
+        <div id="formd" style="margin-top: 80px;">
+        <form id="form" style="border: 2px solid white; padding: 20px;" method="POST">
+            <div class="form-group">
+                <label for="username">Name</label>
+                <input type="text" class="form-control" id="username" placeholder="Name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Registration Number</label>
+                <input type="text" class="form-control" id="regno" placeholder="Registration Number" name="regno" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Phone Number</label>
+                <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="phoneno" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-primary sub_btn" id="submit" style="width: 100%; background-color: blue;">Subscribe</button>
+        </form>
+        </div>
+        <div class="bg-wrapper">
+            <img src="img-02.png">
+        </div>
+        <div class="bg-wrapper2">
+            <img src="img-01.gif" style="height: 250px;">
+        </div>
+        <br><br>
+    </section>
+
+    <!-- <center></center> -->
+    <!-- <img src="dots.png" style="position: absolute;" id="bg"> -->
+<script
+  src="http://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="js/script.js"></script> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+$('.sub_btn').on('click', function(event){
+    event.preventDefault();
+    var phoneno = $('#phone').val();
+    if(phoneno.length > 12 || phoneno.length <10){
+        swal("Enter a valid phone no!!");
+        $('#form')[0].reset();
+        return false;
+    }
+    var regno = $('#regno').val();
+    var patt = /^([0-9]{2})([a-zA-Z]{3})([0-9]{3,4})$/;
+    if(!patt.test(regno))
+    {
+        swal("Enter a valid registration number");
+        $('#form')[0].reset();
+        return false;
+    }
+
+
+    var name = $('#username').val();
+    var email = $('#email').val();
+    if(name.length==0 || email.length==0){
+        swal("Enter all fields");
+        $('#form')[0].reset();
+        return false;
+    }
+    var data = {
+            'name'   : $('#username').val(),
+            'email'  : $('#email').val(),
+            'phoneno': $('#phone').val(),
+            'regno'  : $('#regno').val()
+    };
+    console.log(data);
+    $.ajax({
+        type: "POST",
+        url: "https://reversecodingsubs.herokuapp.com/subs",
+        data: data,
+        dataType: "json", 
+        encode: true,
+        beforeSend: function() {
+            $('.sub_btn').text('subscribing...');
+        }
+    }).done(function(data) {
+        swal("Great job!", "You are successfully registered!", "success")
+        $('.sub_btn').text('subscribe');
+        $('#form')[0].reset();
+    });
+
+});
+
+</script>
+</body>
+</html>
