@@ -5,17 +5,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="prateek">
 	<meta name="description" content="Subscription Portal">
-	<title>Subscription Portal</title>
+	<title>Codart | Subscription Portal</title>
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+    <style type="text/css">
+        .sponsor img{
+            width: 250px; 
+            height: auto; 
+            position: absolute; 
+            top: 50px; 
+            left: 200px;
+        }
+    @media only screen and (max-width: 500px){
+        .sponsor img{
+            width: 250px; 
+            height: auto; 
+            position: absolute; 
+            top: 0px; 
+            left: 60px;
+            right: 0px;
+        }
+    }
+    </style>
 </head>
 <body>
 <header>
     <div class="header-wrapper">
-        <span><img src="logo.png"></span>
-	   <!-- <h1 style="text-align: center; font-weight: bold;">REVERSE <span style="background-color: blue;">CODING</span> </h1> -->
+        <span><img src="logo.png" style="height: 200px; width: auto;"></span>
     </div>
 </header>
     <section class="main-wrapper">
@@ -23,36 +41,46 @@
         <form id="form" style="border: 2px solid white; padding: 20px;" method="POST">
             <div class="form-group">
                 <label for="username">Name</label>
-                <input type="text" class="form-control" id="username" placeholder="Name" name="name" required>
+                <input type="text" class="form-control" id="username" placeholder="Name" name="name_1" required>
             </div>
             <div class="form-group">
                 <label for="username">Registration Number</label>
-                <input type="text" class="form-control" id="regno" placeholder="Registration Number" name="regno" required>
+                <input type="text" class="form-control" id="regno" placeholder="Registration Number" name="regno_1" required>
             </div>
             <div class="form-group">
                 <label for="username">Phone Number</label>
-                <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="phoneno" required>
+                <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="phoneno_1" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+                <input type="email" class="form-control" id="email" placeholder="Email" name="email_1" required>
             </div>
             <button type="submit" class="btn btn-primary sub_btn" id="submit" style="width: 100%; background-color: blue;">Subscribe</button>
         </form>
         </div>
-        <div class="bg-wrapper">
-            <img src="img-02.png">
+        <!-- <div class="bg-wrapper">
+            <img src="tech.png" style="width: 200px; height: auto;">
         </div>
         <div class="bg-wrapper2">
-            <img src="img-01.gif" style="height: 250px;">
+            <img src="he.png" style="width: 200px; height: auto;">
         </div>
-        <br><br>
+        <br><br> -->
+        <center><h1 style="color: white;">In association with</h1></center>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <center>
+                    <img src="tech.png" style="width: 250px; height: auto;">
+                </center>
+            </div>
+            <div class="col-md-6 col-sm-12 sponsor" style="position: relative;">
+                <center>
+                    <img src="he.png">
+                </center>
+            </div>
+        </div>
     </section>
-
-    <!-- <center></center> -->
-    <!-- <img src="dots.png" style="position: absolute;" id="bg"> -->
 <script
-  src="http://code.jquery.com/jquery-2.2.4.min.js"
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -94,7 +122,7 @@ $('.sub_btn').on('click', function(event){
     console.log(data);
     $.ajax({
         type: "POST",
-        url: "https://reversecodingsubs.herokuapp.com/subs",
+        url: "https://acmcodart-m.herokuapp.com/register",
         data: data,
         dataType: "json", 
         encode: true,
